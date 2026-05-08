@@ -1,8 +1,8 @@
 ##
 ## EPITECH PROJECT, 2025
-## first makefile
+## main makefile
 ## File description:
-## idk what it does
+## makefile
 ##
 
 SRC :=	src/main.c \
