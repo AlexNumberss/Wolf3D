@@ -50,6 +50,12 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
-
-# debug information files
-*.dwo
+.ignore
+.gcno
+.gcda
+*~
+temp
+wolf3d
+compile_commands.json
+.cache
+callgrind*
