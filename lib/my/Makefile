@@ -1,8 +1,8 @@
 ##
 ## EPITECH PROJECT, 2025
-## lib makefile
+## first makefile
 ## File description:
-## makefile
+## idk what it does
 ##
 
 # Variables

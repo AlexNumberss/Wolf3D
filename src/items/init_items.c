@@ -14,6 +14,7 @@
 #include <SFML/Graphics/Font.h>
 #include <SFML/Graphics/Rect.h>
 #include <SFML/Graphics/RectangleShape.h>
+#include <SFML/Graphics/Sprite.h>
 #include <SFML/Graphics/Text.h>
 #include <SFML/Graphics/Texture.h>
 #include <SFML/Graphics/Types.h>
@@ -21,7 +22,7 @@
 #include <stdbool.h>
 #include <string.h>
 
-static sfRectangleShape *init_item_background(sfTexture *texture)
+sfRectangleShape *init_background(sfTexture *texture)
 {
     sfRectangleShape *rect = sfRectangleShape_create();
     sfVector2f size = {64, 64};
@@ -41,12 +42,14 @@ item_t *init_item(sfTexture *texture, int uses, char *name,
 {
     item_t *item = malloc(sizeof(item_t));
 
-    if (!item)
+    if (!item || !texture)
         return NULL;
     item->name = strdup(name);
-    item->background = init_item_background(texture);
-    if (!item->background)
+    item->background = init_background(texture);
+    item->sprite = sfSprite_create();
+    if (!item->background || !item->sprite)
         return (NULL);
+    sfSprite_setTexture(item->sprite, texture, sfFalse);
     item->hovered = false;
     item->on_use = (void *) function;
     item->uses = uses;

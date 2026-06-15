@@ -5,6 +5,7 @@
 ** utils
 */
 
+#include "wolf3d.h"
 #include <SFML/Graphics/RenderWindow.h>
 #include <SFML/Graphics/Types.h>
 #include <SFML/Window/VideoMode.h>
@@ -13,7 +14,21 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include "wolf3d.h"
+#include <stdio.h>
+
+bool is_player_alive(player_t *p)
+{
+    if (p->stats->health <= 0) {
+        if (p->score <= 150)
+            printf("big loss right here..\n");
+        if (p->score <= 500 && p->score > 150)
+            printf("now we're getting somewhere\n");
+        if (p->score <= 1000 && p->score > 500)
+            printf("good job!\n");
+        return false;
+    }
+    return true;
+}
 
 bool has_display(char **env)
 {
@@ -33,10 +48,9 @@ void exit_with_message(char *exit_message, int message_channel, int exit_value)
     exit(exit_value);
 }
 
-void dir_giver(player_t *player)
+static void dir_giver(player_t *player)
 {
-    player->dir_v =
-        (sfVector2f) {cos(player->rads), sin(player->rads)};
+    player->dir_v = (sfVector2f) {cos(player->rads), sin(player->rads)};
 }
 
 void rad_giver(player_t *player)
